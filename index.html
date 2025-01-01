@@ -1,0 +1,84 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scientific Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    </link>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+        <div class="text-right mb-4">
+            <input type="text" id="display" class="w-full p-2 text-2xl border border-gray-300 rounded" readonly>
+        </div>
+        <div class="grid grid-cols-4 gap-2">
+            <button class="bg-gray-200 p-2 rounded text-xl" onclick="appendToDisplay('(')">(</button>
+            <button class="bg-gray-200 p-2 rounded text-xl" onclick="appendToDisplay(')')">)</button>
+            <button class="bg-gray-200 p-2 rounded text-xl" onclick="deleteLast()">DEL</button>
+            <button class="bg-gray-200 p-2 rounded text-xl" onclick="clearDisplay()">C</button>
+            <button class="bg-gray-200 p-2 rounded text-xl" onclick="appendToDisplay('sin(')">sin</button>
+            <button class="bg-gray-200 p-2 rounded text-xl" onclick="appendToDisplay('cos(')">cos</button>
+            <button class="bg-gray-200 p-2 rounded text-xl" onclick="appendToDisplay('tan(')">tan</button>
+            <button class="bg-gray-200 p-2 rounded text-xl" onclick="appendToDisplay('log(')">log</button>
+            <button class="bg-gray-200 p-2 rounded text-xl" onclick="appendToDisplay('asin(')">sin<sup>-1</sup></button>
+            <button class="bg-gray-200 p-2 rounded text-xl" onclick="appendToDisplay('acos(')">cos<sup>-1</sup></button>
+            <button class="bg-gray-200 p-2 rounded text-xl" onclick="appendToDisplay('atan(')">tan<sup>-1</sup></button>
+            <button class="bg-gray-200 p-2 rounded text-xl" onclick="appendToDisplay('%')">%</button>
+            <button class="bg-gray-200 p-2 rounded text-xl" onclick="appendToDisplay('^')">^</button>
+            <button class="bg-gray-200 p-2 rounded text-xl" onclick="appendToDisplay('pi')">π</button>
+            <button class="bg-gray-200 p-2 rounded text-xl" onclick="appendToDisplay('sqrt(')">√</button>
+            <button class="bg-orange-500 text-white p-2 rounded text-xl" onclick="appendToDisplay('/')">/</button>
+            <button class="bg-gray-200 p-2 rounded text-xl" onclick="appendToDisplay('7')">7</button>
+            <button class="bg-gray-200 p-2 rounded text-xl" onclick="appendToDisplay('8')">8</button>
+            <button class="bg-gray-200 p-2 rounded text-xl" onclick="appendToDisplay('9')">9</button>
+            <button class="bg-orange-500 text-white p-2 rounded text-xl" onclick="appendToDisplay('*')">*</button>
+            <button class="bg-gray-200 p-2 rounded text-xl" onclick="appendToDisplay('4')">4</button>
+            <button class="bg-gray-200 p-2 rounded text-xl" onclick="appendToDisplay('5')">5</button>
+            <button class="bg-gray-200 p-2 rounded text-xl" onclick="appendToDisplay('6')">6</button>
+            <button class="bg-orange-500 text-white p-2 rounded text-xl" onclick="appendToDisplay('-')">-</button>
+            <button class="bg-gray-200 p-2 rounded text-xl" onclick="appendToDisplay('1')">1</button>
+            <button class="bg-gray-200 p-2 rounded text-xl" onclick="appendToDisplay('2')">2</button>
+            <button class="bg-gray-200 p-2 rounded text-xl" onclick="appendToDisplay('3')">3</button>
+            <button class="bg-orange-500 text-white p-2 rounded text-xl" onclick="appendToDisplay('+')">+</button>
+            <button class="bg-gray-200 p-2 rounded text-xl" onclick="appendToDisplay('0')">0</button>
+            <button class="bg-gray-200 p-2 rounded text-xl" onclick="appendToDisplay('00')">00</button>
+            <button class="bg-gray-200 p-2 rounded text-xl" onclick="appendToDisplay('.')">.</button>
+            <button class="bg-green-500 text-white p-2 rounded text-xl" onclick="calculateResult()">=</button>
+        </div>
+    </div>
+
+    <script>
+        function appendToDisplay(value) {
+            document.getElementById('display').value += value;
+        }
+
+        function clearDisplay() {
+            document.getElementById('display').value = '';
+        }
+
+        function deleteLast() {
+            let display = document.getElementById('display');
+            display.value = display.value.slice(0, -1);
+        }
+
+        function calculateResult() {
+            let display = document.getElementById('display');
+            try {
+                display.value = eval(display.value.replace('^', '**').replace('pi', 'Math.PI').replace('sqrt', 'Math.sqrt').replace('sin', 'Math.sin').replace('cos', 'Math.cos').replace('tan', 'Math.tan').replace('log', 'Math.log').replace('asin', 'Math.asin').replace('acos', 'Math.acos').replace('atan', 'Math.atan'));
+            } catch (e) {
+                display.value = 'Error';
+            }
+        }
+    </script>
+</body>
+
+</html>
